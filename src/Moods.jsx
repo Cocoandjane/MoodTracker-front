@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import Mood from "./Mood"
-export default function Moods({ moods,editMood, onRemove, sortbyDate,sortbyRating  }) {
+export default function Moods({ moods,onEdit, onRemove, sortbyDate,sortbyRating  }) {
     function handleSortbyDate(e) {
         sortbyDate()
     }
@@ -11,7 +11,6 @@ export default function Moods({ moods,editMood, onRemove, sortbyDate,sortbyRatin
 
     return (
         <div>
-
             <Link to='/MoodForm'>
                 <button>Add Mood</button>
             </Link>
@@ -26,7 +25,7 @@ export default function Moods({ moods,editMood, onRemove, sortbyDate,sortbyRatin
                     rating={mood.rating}
                     onRemove={onRemove}
                     sortbyDate={sortbyDate}
-                    editMood={editMood}
+                    onEdit={onEdit}
                 />
             })}
         </div>

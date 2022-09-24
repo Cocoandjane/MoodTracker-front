@@ -3,10 +3,16 @@ import './App.css'
 import Moods from './Moods'
 import MoodForm from './MoodForm'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [moods, setMoods] = useState([])
+  const now = new Date().toString()
+  function handleSumitNewMood(mood, rating) {
+    setMoods(prevMoods => {
+      return [...prevMoods, { id: uuidv4(), now: now, mood: mood, rating: rating }]
+    })
+  }
 
 const sortbyDate = () => {
   console.log("clicked sort date")
@@ -39,12 +45,13 @@ const sortbyRating =() => {
     setMoods(editedMood)
   }
 
+
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Moods editMood={editMood} sortbyRating={sortbyRating} sortbyDate={sortbyDate}  onRemove={onRemove} moods={moods} />}></Route>
-          <Route path='/MoodForm' element={<MoodForm setMoods={setMoods} />}></Route>
+          <Route path="/" element={<Moods onEdit={editMood} sortbyRating={sortbyRating} sortbyDate={sortbyDate}  onRemove={onRemove} moods={moods} />}></Route>
+          <Route path='/MoodForm' element={<MoodForm onSubmit={handleSumitNewMood} />}></Route>
         </Routes>
       </div>
     </Router>

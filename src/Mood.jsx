@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from 'react'
-export default function Mood({ id, mood, now, rating, onRemove, editMood }) {
+export default function Mood({ id, mood, now, rating, onRemove, onEdit }) {
 
     let stars = ""
     for (let i = 0; i < 10; i++) {
@@ -17,11 +17,15 @@ export default function Mood({ id, mood, now, rating, onRemove, editMood }) {
     }
 
     function handleSubmitEdited(e) {
-        editMood(id, newMood ? newMood: mood, newRating ? newRating: rating)
-        setNewMood("")
-        setnewRating()
+        onEdit(id, newMood ? newMood: mood, newRating ? newRating: rating)
+        // setNewMood("")
+        // setnewRating()
         setEditing(false)
     }
+
+   
+
+    
     const [isEditing, setEditing] = useState(false);
     const [newMood, setNewMood] = useState('');
     const [newRating, setnewRating] = useState();
